@@ -14,10 +14,10 @@
 </div>
 <dl>
   <dt>id</dt>
-  <dd class=monospace>{{ self.inscription_id }}</dd>
+  <dd class="monospace id">{{ self.inscription_id }}</dd>
 %% if let Ok(address) = self.chain.address_from_script(&self.output.script_pubkey ) {
-  <dt>address</dt>
-  <dd class=monospace>{{ address }}</dd>
+  <dt >address</dt>
+  <dd class="monospace address">{{ address }}</dd>
 %% }
   <dt>output value</dt>
   <dd>{{ self.output.value }}</dd>
@@ -31,24 +31,24 @@
   <dt>content</dt>
   <dd><a href=/content/{{self.inscription_id}}>link</a></dd>
   <dt>content length</dt>
-  <dd>{{ content_length }} bytes</dd>
+  <dd class="content_length">{{ content_length }} bytes</dd>
 %% }
 %% if let Some(content_type) = self.inscription.content_type() {
   <dt>content type</dt>
-  <dd>{{ content_type }}</dd>
+  <dd class="content_type">{{ content_type }}</dd>
 %% }
   <dt>timestamp</dt>
   <dd><time>{{ self.timestamp }}</time></dd>
   <dt>genesis height</dt>
   <dd><a href=/block/{{ self.genesis_height }}>{{ self.genesis_height }}</a></dd>
-  <dt>genesis fee</dt>
-  <dd>{{ self.genesis_fee }}</dd>
+  <dt >genesis fee</dt>
+  <dd class="genesis_fee">{{ self.genesis_fee }}</dd>
   <dt>genesis transaction</dt>
   <dd><a class=monospace href=/tx/{{ self.inscription_id.txid }}>{{ self.inscription_id.txid }}</a></dd>
   <dt>location</dt>
-  <dd class=monospace>{{ self.satpoint }}</dd>
+  <dd class="monospace location">{{ self.satpoint }}</dd>
   <dt>output</dt>
-  <dd><a class=monospace href=/output/{{ self.satpoint.outpoint }}>{{ self.satpoint.outpoint }}</a></dd>
+  <dd><a class="monospace output" href=/output/{{ self.satpoint.outpoint }}>{{ self.satpoint.outpoint }}</a></dd>
   <dt>offset</dt>
-  <dd>{{ self.satpoint.offset }}</dd>
+  <dd class="offset">{{ self.satpoint.offset }}</dd>
 </dl>
