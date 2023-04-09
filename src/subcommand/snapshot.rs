@@ -32,9 +32,8 @@ pub(crate) fn run(options: Options) -> Result {
 
   fs::copy(path, copyPath)?;
 
-  let tar_gz = File::create("index.tar.gz")?;
-  let index_file = File::open("index.redb.clone")?;
-  let enc = GzEncoder::new(tar_gz, Compression::default());
+  //let tar_gz = File::create("index.tar.gz")?;
+  
 
   
   
