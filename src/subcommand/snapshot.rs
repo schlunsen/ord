@@ -4,6 +4,8 @@ use flate2::Compression;
 use std::fs;
 use std::fs::File;
 use std::io::{Write, Read};
+extern crate fs_extra;
+use fs_extra::file::{copy, CopyOptions};
 
 #[derive(Debug, Parser)]
 pub(crate) struct Snapshot {
@@ -30,7 +32,10 @@ pub(crate) fn run(options: Options) -> Result {
 
   let copyPath = data_dir.join("index.redb.clone");
 
-  fs::copy(path, copyPath)?;
+  let options = CopyOptions::new(); //Initialize default values for CopyOptions
+  copy(path, copyPath, &options)?;
+
+  
 
   //let tar_gz = File::create("index.tar.gz")?;
   
