@@ -133,6 +133,10 @@ impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
 
 impl Index {
   pub(crate) fn perform_snapshot(&self) -> Result<bool> {
+    let result = self.update();
+
+    
+
     println!("Snapshot");
     Ok(true)
   }
