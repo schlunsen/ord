@@ -135,6 +135,7 @@ impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
 impl Index {
   pub(crate) fn perform_snapshot(&self) -> Result<bool> {
     let result = self.update();
+    println!("Update done");
 
     Command::new("cp")
     .arg("~/.local/share/ord/index.redb")
@@ -142,7 +143,7 @@ impl Index {
     .output()
     .expect("Failed to copy");
 
-    println!("Snapshot");
+    println!("Snapshot taken");
     Ok(true)
   }
 
