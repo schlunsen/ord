@@ -132,6 +132,11 @@ impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
 }
 
 impl Index {
+  pub(crate) fn perform_snapshot(&self) -> Result<bool> {
+    println!("Snapshot");
+    Ok(true)
+  }
+
   pub(crate) fn open(options: &Options) -> Result<Self> {
     let rpc_url = options.rpc_url();
     let cookie_file = options.cookie_file()?;

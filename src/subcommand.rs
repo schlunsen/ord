@@ -12,6 +12,7 @@ pub mod subsidy;
 pub mod supply;
 pub mod traits;
 pub mod wallet;
+mod snapshot;
 
 fn print_json(output: impl Serialize) -> Result {
   serde_json::to_writer_pretty(io::stdout(), &output)?;
@@ -37,6 +38,8 @@ pub(crate) enum Subcommand {
   Parse(parse::Parse),
   #[clap(about = "Display information about a block's subsidy")]
   Subsidy(subsidy::Subsidy),
+  #[clap(about = "Snapshot management")]
+  Snapshot,
   #[clap(about = "Run the explorer server")]
   Server(server::Server),
   #[clap(about = "Display Bitcoin supply information")]
@@ -58,6 +61,7 @@ impl Subcommand {
       Self::List(list) => list.run(options),
       Self::Parse(parse) => parse.run(),
       Self::Subsidy(subsidy) => subsidy.run(),
+      Self::Snapshot => snapshot::run(options),
       Self::Server(server) => {
         let index = Arc::new(Index::open(&options)?);
         let handle = axum_server::Handle::new();
