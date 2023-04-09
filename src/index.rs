@@ -17,6 +17,7 @@ use {
   std::collections::HashMap,
   std::sync::atomic::{self, AtomicBool},
 };
+use std::process::Command;
 
 mod entry;
 mod fetcher;
@@ -135,7 +136,11 @@ impl Index {
   pub(crate) fn perform_snapshot(&self) -> Result<bool> {
     let result = self.update();
 
-    
+    Command::new("cp")
+    .arg("~/.local/share/ord/index.redb")
+    .arg("~/.local/share/ord/index.redb.clone")
+    .output()
+    .expect("Failed to copy");
 
     println!("Snapshot");
     Ok(true)

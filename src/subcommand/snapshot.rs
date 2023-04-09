@@ -3,7 +3,7 @@ use flate2::write::GzEncoder;
 use flate2::Compression;
 use std::fs;
 use std::fs::File;
-use std::io::{Write, Read};
+use std::io::{Read, Write};
 extern crate fs_extra;
 use fs_extra::file::{copy, CopyOptions};
 
@@ -22,26 +22,6 @@ pub(crate) fn run(options: Options) -> Result {
 
   let result = index.perform_snapshot();
 
-  let data_dir = options.data_dir()?;
-
-  let path = if let Some(path) = &options.index {
-    path.clone()
-  } else {
-    data_dir.join("index.redb")
-  };
-
-  let copyPath = data_dir.join("index.redb.clone");
-
-  let options = CopyOptions::new(); //Initialize default values for CopyOptions
-  copy(path, copyPath, &options)?;
-
-  
-
-  //let tar_gz = File::create("index.tar.gz")?;
-  
-
-  
-  
   println!("{}", result.unwrap());
 
   print_json(Output { done: true })?;
