@@ -1,3 +1,4 @@
+use std::process::Command;
 use {
   self::{
     entry::{
@@ -17,7 +18,6 @@ use {
   std::collections::HashMap,
   std::sync::atomic::{self, AtomicBool},
 };
-use std::process::Command;
 
 mod entry;
 mod fetcher;
@@ -137,11 +137,11 @@ impl Index {
     let result = self.update();
     println!("Update done");
 
-    Command::new("cp")
-    .arg("~/.local/share/ord/index.redb")
-    .arg("~/.local/share/ord/index.redb.clone")
-    .output()
-    .expect("Failed to copy");
+    Command::new("sh")
+      .arg("-c")
+      .arg("~/.local/share/ord/index.redb ~/.local/share/ord/index.redb.clone")
+      .output()
+      .expect("Failed to copy");
 
     println!("Snapshot taken");
     Ok(true)
